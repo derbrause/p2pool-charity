@@ -61,7 +61,50 @@ nets = dict(
         DUST_THRESHOLD=1e8,
         CHARITY_ADDRESS='1864597a1e6f7e83555b4ec5913d455f4a5002a5'.decode('hex')
     ),
-
+    einsteinium=math.Object(
+        P2P_PREFIX='e8f1c4ac'.decode('hex'),
+        P2P_PORT=41878,
+        ADDRESS_VERSION=33,
+        RPC_PORT=41879,
+        RPC_CHECK=defer.inlineCallbacks(lambda bitcoind: defer.returnValue(
+            'einsteiniumaddress' in (yield bitcoind.rpc_help()) and
+            not (yield bitcoind.rpc_getinfo())['testnet']
+        )),
+        SUBSIDY_FUNC=lambda height: __import__('einsteinium_subsidy').GetBlockBaseValue(height),
+        POW_FUNC=lambda data: pack.IntType(256).unpack(__import__('ltc_scrypt').getPoWHash(data)),
+        BLOCK_PERIOD=60, # s
+        SYMBOL='EMC2',
+        CONF_FILE_FUNC=lambda: os.path.join(os.path.join(os.environ['APPDATA'], 'Einsteinium') if platform.system() == 'Windows' else os.path.expanduser('~/Library/Application Support/Einsteinium/') if platform.system() == 'Darwin' else os.path.expanduser('~/.einsteinium'), 'einsteinium.conf'),
+        BLOCK_EXPLORER_URL_PREFIX='http://cryptexplorer.com/block/',
+        ADDRESS_EXPLORER_URL_PREFIX='http://cryptexplorer.com/address/',
+        TX_EXPLORER_URL_PREFIX='http://cryptexplorer.com/tx/',
+        SANE_TARGET_RANGE=(2**256//1000000000 - 1, 2**256//1000 - 1),
+        DUMB_SCRYPT_DIFF=2**16,
+        DUST_THRESHOLD=1e8,
+        CHARITY_ADDRESS='1cec44c9f9b769ae08ebf9d694c7611a16edf615'.decode('hex')
+    ),
+    einsteinium_testnet=math.Object(
+        P2P_PREFIX='faa2f0c1'.decode('hex'),
+        P2P_PORT=31878,
+        ADDRESS_VERSION=111,
+        RPC_PORT=31879,
+        RPC_CHECK=defer.inlineCallbacks(lambda bitcoind: defer.returnValue(
+            'einsteiniumaddress' in (yield bitcoind.rpc_help()) and
+            (yield bitcoind.rpc_getinfo())['testnet']
+        )),
+        SUBSIDY_FUNC=lambda height: __import__('einsteinium_subsidy').GetBlockBaseValue(height),
+        POW_FUNC=lambda data: pack.IntType(256).unpack(__import__('ltc_scrypt').getPoWHash(data)),
+        BLOCK_PERIOD=60, # s
+        SYMBOL='tEMC2',
+        CONF_FILE_FUNC=lambda: os.path.join(os.path.join(os.environ['APPDATA'], 'Einsteinium') if platform.system() == 'Windows' else os.path.expanduser('~/Library/Application Support/Einsteinium/') if platform.system() == 'Darwin' else os.path.expanduser('~/.einsteinium'), 'einsteinium.conf'),
+        BLOCK_EXPLORER_URL_PREFIX='http://nonexistent-litecoin-testnet-explorer/block/',
+        ADDRESS_EXPLORER_URL_PREFIX='http://nonexistent-litecoin-testnet-explorer/address/',
+        TX_EXPLORER_URL_PREFIX='http://nonexistent-litecoin-testnet-explorer/tx/',
+        SANE_TARGET_RANGE=(2**256//1000000000 - 1, 2**256//1000 - 1),
+        DUMB_SCRYPT_DIFF=2**16,
+        DUST_THRESHOLD=1e8,
+        CHARITY_ADDRESS='1cec44c9f9b769ae08ebf9d694c7611a16edf615'.decode('hex')
+    ),  
 )
 for net_name, net in nets.iteritems():
     net.NAME = net_name

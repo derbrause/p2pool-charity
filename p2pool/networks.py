@@ -45,7 +45,43 @@ nets = dict(
         ANNOUNCE_CHANNEL='#p2pool-alt',
         VERSION_CHECK=lambda v: True,
     ),
-
+    einsteinium=math.Object(
+        PARENT=networks.nets['einsteinium'],
+        SHARE_PERIOD=10, # seconds
+        CHAIN_LENGTH=24*60*60//10, # shares
+        REAL_CHAIN_LENGTH=24*60*60//10, # shares
+        TARGET_LOOKBEHIND=200, # shares
+        SPREAD=30, # blocks
+        IDENTIFIER='e037d5b8c6923411'.decode('hex'),
+        PREFIX='7208c1a53ef629b1'.decode('hex'),
+        P2P_PORT=41877,
+        MIN_TARGET=0,
+        MAX_TARGET=2**256//2**20 - 1,
+        PERSIST=False,
+        WORKER_PORT=41876,
+        BOOTSTRAP_ADDRS='',
+        ANNOUNCE_CHANNEL='#p2pool-alt',
+        VERSION_CHECK=lambda v: True,
+        VERSION_WARNING=lambda v: 'Upgrade Litecoin to >=0.8.5.1!' if v < 80501 else None,
+    ),
+    einsteinium_testnet=math.Object(
+        PARENT=networks.nets['einsteinium_testnet'],
+        SHARE_PERIOD=10, # seconds
+        CHAIN_LENGTH=20*60//3, # shares
+        REAL_CHAIN_LENGTH=20*60//3, # shares
+        TARGET_LOOKBEHIND=200, # shares
+        SPREAD=30, # blocks
+        IDENTIFIER='cca5e24ec6408be0'.decode('hex'),
+        PREFIX='ad9614f6466a39df'.decode('hex'),
+        P2P_PORT=31877,
+        MIN_TARGET=0,
+        MAX_TARGET=2**256//50 - 1,
+        PERSIST=False,
+        WORKER_PORT=31876,
+        BOOTSTRAP_ADDRS='',
+        ANNOUNCE_CHANNEL='#p2pool-alt',
+        VERSION_CHECK=lambda v: True,
+    ),
 )
 for net_name, net in nets.iteritems():
     net.NAME = net_name
