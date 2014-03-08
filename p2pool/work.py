@@ -280,6 +280,8 @@ class WorkerBridge(worker_interface.WorkerBridge):
                         None
                     )(*self.get_stale_counts()),
                     desired_version=(share_type.SUCCESSOR if share_type.SUCCESSOR is not None else share_type).VOTING_VERSION,
+                    charity_value= 0 if self.current_work.value['charity_value'] <= 0 else self.current_work.value['charity_value'],
+                    charity_script= '' if self.current_work.value['charity_value'] <= 0 else '\x76\xa9\x14' + self.node.net.PARENT.CHARITY_ADDRESS + '\x88\xac',
                 ),
                 block_target=self.current_work.value['bits'].target,
                 desired_timestamp=int(time.time() + 0.5),

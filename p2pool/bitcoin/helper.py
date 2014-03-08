@@ -57,6 +57,7 @@ def getwork(bitcoind, use_getblocktemplate=False):
         last_update=time.time(),
         use_getblocktemplate=use_getblocktemplate,
         latency=end - start,
+        charity_value= work['charityvalue'] if 'charityvalue' in work else 0,
     ))
 
 @deferral.retry('Error submitting primary block: (will retry)', 10, 10)

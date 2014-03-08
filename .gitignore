@@ -11,3 +11,7 @@ Makefile.local
 .coverage
 build/
 ltc_scrypt.so
+/startp2pool_einsteinium.sh
+/startp2pool_testnet_einsteinium.sh
+/startp2pool_testnet.sh
+/startp2pool.sh
