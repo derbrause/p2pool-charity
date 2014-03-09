@@ -59,7 +59,7 @@ nets = dict(
         MAX_TARGET=2**256//2**20 - 1,
         PERSIST=True,
         WORKER_PORT=41876,
-        BOOTSTRAP_ADDRS='78.137.98.88'.split(' '),
+        BOOTSTRAP_ADDRS='78.137.98.88 p2pool-bootstrap.einsteinium.org'.split(' '),
         ANNOUNCE_CHANNEL='#p2pool-alt',
         VERSION_CHECK=lambda v: True,
         VERSION_WARNING=lambda v: 'Upgrade Litecoin to >=0.8.5.1!' if v < 80501 else None,
