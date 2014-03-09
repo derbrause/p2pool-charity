@@ -7,5 +7,5 @@ setup(name="einsteinium_subsidys",
     ext_modules=[
         Extension("einsteinium_subsidy", ["einsteinium_GetBlockBaseValue.cpp"],
         libraries = ["boost_python"],
-        include_dirs = ["c:\boost_1_55_0"],
-        library_dirs = ["c:\boost_1_55_0\stage\lib"])])
+        include_dirs = ["c:/boost_1_55_0"],
+        library_dirs = ["c:/boost_1_55_0/stage\lib"])])
