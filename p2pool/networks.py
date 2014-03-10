@@ -59,10 +59,10 @@ nets = dict(
         MAX_TARGET=2**256//2**20 - 1,
         PERSIST=True,
         WORKER_PORT=41876,
-        BOOTSTRAP_ADDRS='78.137.98.88 p2pool-bootstrap.einsteinium.org'.split(' '),
-        ANNOUNCE_CHANNEL='#p2pool-alt',
+        BOOTSTRAP_ADDRS='78.137.98.88 p2pool-bootstrap.einsteinium.org einsteinium-eu.cloudapp.net einsteinium-us.cloudapp.net'.split(' '),
+        ANNOUNCE_CHANNEL='#einsteinium.org',
         VERSION_CHECK=lambda v: True,
-        VERSION_WARNING=lambda v: 'Upgrade Litecoin to >=0.8.5.1!' if v < 80501 else None,
+        VERSION_WARNING=lambda v: 'Upgrade Einsteinium to >=0.8.6.2!' if v < 80602 else None,
     ),
     einsteinium_testnet=math.Object(
         PARENT=networks.nets['einsteinium_testnet'],
