@@ -61,9 +61,7 @@ Linux:
     sudo python setup.py install
 
 	
-	[ NOT WORKING YET!! ]
-	
-Windows (mingw): 
+[NOTWORKING YET] Windows (mingw): 
 * Install MinGW: http://www.mingw.org/wiki/Getting_Started
 * Install Python 2.7: http://www.python.org/getit/
 
